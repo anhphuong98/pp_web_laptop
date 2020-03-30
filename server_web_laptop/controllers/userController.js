@@ -47,42 +47,46 @@ const singUp = (req, res) => {
 const signIn = (req, res) => {
     db.user.findOne({
         where : {
-            email : req.body.email,
+            email : req.body.email
         }
     }).then(function(user){
+        console.log(user);
         if(!user){
             res.json({
                 success : false,
                 message : 'Email is not exist'
             })
         }
-        var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
-        if(!passwordIsValid){
+        else {
+            var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
+            if(!passwordIsValid){
+                res.json({
+                    success : false,
+                    message : 'Password is not valid'
+                })
+            }
+            var accountIsLocked = (user.status == 1);
+            if(accountIsLocked){
+                res.json({
+                    success : false,
+                    message : 'Account is locked'
+                })
+            }
+            var payload = {
+                id : user.id,
+                email : user.email
+            }
+            var token = jwt.sign(payload, config.secret, {
+                expiresIn : 86400
+            });
+    
             res.json({
-                success : false,
-                message : 'Password is not valid'
+                success : true,
+                token : token,
+                data : user
             })
         }
-        var accountIsLocked = (user.status == 1);
-        if(accountIsLocked){
-            res.json({
-                success : false,
-                message : 'Account is locked'
-            })
-        }
-        var payload = {
-            id : user.id,
-            email : user.email
-        }
-        var token = jwt.sign(payload, config.secret, {
-            expiresIn : 86400
-        });
-
-        res.json({
-            secret : true,
-            token : token,
-            data : user
-        })
+       
     })
 }
 

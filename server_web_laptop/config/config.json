@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": null,
+    "password": "pjtjamj",
     "database": "pp_web_laptop",
     "host": "127.0.0.1",
     "dialect": "mysql",
