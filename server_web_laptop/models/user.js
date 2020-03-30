@@ -41,9 +41,13 @@ module.exports = (sequelize, Datatypes) => {
             type : Datatypes.INTEGER,
             defaultValue : 0
         }
+    }, {
+        timestamps : false
     });
     User.associate = (models) => {
-        
+        User.hasMany(models.comment, {
+            foreignKey : 'user_id'
+        });
     }
     return User;
 }

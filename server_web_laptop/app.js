@@ -51,7 +51,7 @@ app.use(function(err, req, res, next) {
 
 db.sequelize.sync().then(function(){
   app.listen(5000, () => {
-    console.log("Server is runnign at localhost:5000");
+    console.log("Server is running at localhost:5000");
   })
 })
 

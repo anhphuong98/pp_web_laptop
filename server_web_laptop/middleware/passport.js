@@ -14,7 +14,24 @@ var userStrategy = new JwtStrategy(jwtOptions, function(jwt_payload, next){
     db.user.findOne({
         where : {
             id : jwt_payload.id,
-            email : jwt_payload.email
+            email : jwt_payload.email,
+            role : 0
+        }
+    }).then(function(user){
+        if(user){
+            return next(null, user);
+        }else{
+            return next(null, false);
+        }
+    })
+});
+
+var adminStrategy = new JwtStrategy(jwtOptions, function(jwt_payload, next){
+    db.user.findOne({
+        where : {
+            id : jwt_payload.id,
+            email : jwt_payload.email,
+            role : 1
         }
     }).then(function(user){
         if(user){
@@ -26,4 +43,5 @@ var userStrategy = new JwtStrategy(jwtOptions, function(jwt_payload, next){
 });
 
 passport.use('jwt-user', userStrategy);
+passport.use('jwt-admin', adminStrategy);
 module.exports = passport;
