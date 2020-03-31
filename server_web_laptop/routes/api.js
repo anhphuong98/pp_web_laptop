@@ -1,6 +1,7 @@
 var userController = require('../controllers/userController');
 var laptopController = require('../controllers/laptopController');
 var commentController = require('../controllers/commentController');
+var evaluationController = require('../controllers/evaluationController');
 var passport = require('passport');
 
 module.exports = (app) => {
@@ -30,6 +31,10 @@ module.exports = (app) => {
     app.delete('/api/comment/:id', passport.authenticate('jwt-user', {session : false}), commentController.destroy);
 
     // evaluation
+
+    app.get('/api/evaluation/:id', evaluationController.index);
+    app.post('/api/evaluation', passport.authenticate('jwt-user', {session : false}), evaluationController.store);
+    app.put('/api/evaluation/:id', passport.authenticate('jwt-user', {session : false}), evaluationController.update);
 
     // order
 
