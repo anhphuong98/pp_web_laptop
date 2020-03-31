@@ -2,6 +2,7 @@ var userController = require('../controllers/userController');
 var laptopController = require('../controllers/laptopController');
 var commentController = require('../controllers/commentController');
 var evaluationController = require('../controllers/evaluationController');
+var orderController = require('../controllers/orderController');
 var passport = require('passport');
 
 module.exports = (app) => {
@@ -11,9 +12,9 @@ module.exports = (app) => {
 
     // laptop for guest
     app.get('/api/laptop', laptopController.index);
-    app.post('/api/laptop/brand', laptopController.filterLaptopByBrand);
-    app.post('/api/laptop/name', laptopController.filterLaptopByName);
-    app.post('/api/laptop', laptopController.filterLaptop)
+    app.get('/api/laptop/brand', laptopController.filterLaptopByBrand);
+    app.get('/api/laptop/name', laptopController.filterLaptopByName);
+    app.get('/api/laptop/filter', laptopController.filterLaptop)
     app.get('/api/laptop/:id',  laptopController.show);
 
     // laptop for admin store, update, delete
@@ -36,10 +37,21 @@ module.exports = (app) => {
     app.post('/api/evaluation', passport.authenticate('jwt-user', {session : false}), evaluationController.store);
     app.put('/api/evaluation/:id', passport.authenticate('jwt-user', {session : false}), evaluationController.update);
 
-    // order
+    // order for admin
+
+    app.get('/api/order/admin', passport.authenticate('jwt-admin', {session : false}), orderController.indexAdmin);
+    app.get('/api/order/admin/status', passport.authenticate('jwt-admin', {session : false}), orderController.indexStatusAdmin);
+    app.put('/api/order/admin/status/:id', passport.authenticate('jwt-admin', {session : false}), orderController.updateStatusAdmin);
+    app.get('/api/order/admin/:id', passport.authenticate('jwt-admin', {session : false}), orderController.showAdmin);
+
+
+    // order for user
+        // get all order cua user
+        // chinh sua order cua user
+        // dat order
+
 
     // image
-
     //user
 
 }

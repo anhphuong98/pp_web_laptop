@@ -33,7 +33,7 @@ const filterLaptopByBrand = (req, res) => {
 
     const limit = pageSize ? pageSize : 20;
     const offset = page ? page * limit : 0;
-    const brand = req.body.brand ? req.body.brand : null;
+    const brand = req.query.brand ? req.query.brand : null;
     db.laptop.findAndCountAll({
         offset : offset,
         limit : limit,
@@ -65,7 +65,7 @@ const filterLaptopByName = (req, res) => {
 
     const limit = pageSize ? pageSize : 20;
     const offset = page ? page * limit : 0;
-    const name = req.body.name ? req.body.name : null;
+    const name = req.query.name ? req.query.name : null;
     db.laptop.findAndCountAll({
         offset : offset,
         limit : limit,
@@ -99,15 +99,15 @@ const filterLaptop = (req, res) => {
 
     const limit = pageSize ? pageSize : 20;
     const offset = page ? page * limit : 0;
-    const cpu = req.body.cpu ? req.body.cpu : '';
-    const ram = req.body.ram ? req.body.ram : '';
-    const screen = req.body.screen ? req.body.screen : 15;
-    const color = req.body.color ? req.body.color : '';
-    const os = req.body.os ? req.body.os : '';
-    const storage = req.body.storage ? req.body.storage : '';
-    const pin = req.body.pin ? req.body.pin : '';
-    const priceBottom = req.body.priceBottom ? req.body.priceBottom : 0;
-    const priceTop = req.body.priceTop ? req.body.priceTop : 999999999;
+    const cpu = req.query.cpu ? req.query.cpu : '';
+    const ram = req.query.ram ? req.query.ram : '';
+    const screen = req.query.screen ? req.query.screen : 15;
+    const color = req.query.color ? req.query.color : '';
+    const os = req.query.os ? req.query.os : '';
+    const storage = req.query.storage ? req.query.storage : '';
+    const pin = req.query.pin ? req.query.pin : '';
+    const priceBottom = req.query.priceBottom ? req.query.priceBottom : 0;
+    const priceTop = req.query.priceTop ? req.query.priceTop : 999999999;
     db.laptop.findAndCountAll({
         offset : offset,
         limit : limit,
