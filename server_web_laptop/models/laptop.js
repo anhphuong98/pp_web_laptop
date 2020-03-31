@@ -79,6 +79,9 @@ module.exports = (sequelize, DataTypes) => {
         Laptop.hasMany(models.comment, {
             foreignKey : 'laptop_id'
         });
+        Laptop.hasMany(models.evaluation, {
+            foreignKey : 'laptop_id'
+        });
     }
     return Laptop;
 }
