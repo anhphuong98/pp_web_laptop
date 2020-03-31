@@ -82,6 +82,9 @@ module.exports = (sequelize, DataTypes) => {
         Laptop.hasMany(models.evaluation, {
             foreignKey : 'laptop_id'
         });
+        Laptop.hasMany(models.order_detail, {
+            foreignKey : 'laptop_id'
+        });;
     }
     return Laptop;
 }
