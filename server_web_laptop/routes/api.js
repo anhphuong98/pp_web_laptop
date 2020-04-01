@@ -47,8 +47,11 @@ module.exports = (app) => {
 
     // order for user
         // get all order cua user
+    app.get('/api/order', passport.authenticate('jwt-user', {session : false}), orderController.index);
         // chinh sua order cua user
+    app.put('/api/order/:id', passport.authenticate('jwt-user', {session : false}), orderController.update);
         // dat order
+    app.post('/api/order', passport.authenticate('jwt-user', {session : false}), orderController.store);
 
 
     // image
