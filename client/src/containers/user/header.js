@@ -2,7 +2,7 @@ import React, { Component} from 'react';
 import { Input, NavbarToggler, Navbar, Nav, NavItem, NavLink, NavbarBrand,
     Collapse, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, InputGroup,
     InputGroupAddon, InputGroupText, Breadcrumb, BreadcrumbItem} from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class Header extends Component {
     constructor(props) {
@@ -11,11 +11,17 @@ class Header extends Component {
             isOpen : false
         };
         this.toggle = this.toggle.bind(this);
+        this.handleSignOut = this.handleSignOut.bind(this);
     }
     toggle()  {
         this.setState((state) => ({
             isOpen : !state.isOpen
         }));
+    }
+    handleSignOut() {
+        localStorage.clear();
+        window.location.reload();
+        this.props.history.push('/');
     }
     render() {
         return (
@@ -57,20 +63,31 @@ class Header extends Component {
                                     <i href="#" className="fas fa-shopping-cart" 
                                         style={{ fontSize : "28px", cursor : "pointer", marginRight : "1rem"}}></i>
                                 </NavItem>
-                            </Nav>                          
-                            <UncontrolledDropdown>
+                            </Nav>       
+                            {
+                                localStorage.getItem("signined") ? 
+                                <UncontrolledDropdown>
+                                <DropdownToggle style={{ backgroundColor : "#43A892"}}>
+                                    {localStorage.getItem("name")}
+                                </DropdownToggle> 
+                                <DropdownMenu>
+                                    <DropdownItem>Hồ sơ</DropdownItem>
+                                    <DropdownItem>Lịch sử </DropdownItem>
+                                    <DropdownItem  onClick={this.handleSignOut}>Đăng xuất</DropdownItem>
+                                </DropdownMenu>
+                                </UncontrolledDropdown>    
+                                :  
+                                <UncontrolledDropdown>
                                 <DropdownToggle style={{ backgroundColor : "#43A892"}}>
                                     Tài khoản
                                 </DropdownToggle> 
                                 <DropdownMenu>
-                                    <DropdownItem>
-                                        <Link to="/login">Đăng nhập</Link>
-                                    </DropdownItem>
-                                    <DropdownItem>
-                                        <Link to="/signUp">Đăng ký</Link>
-                                    </DropdownItem>
+                                    <DropdownItem tag="a" href="/login">Đăng nhập</DropdownItem>
+                                    <DropdownItem  tag="a" href='/signUp'>Đăng ký</DropdownItem>
                                 </DropdownMenu>
-                            </UncontrolledDropdown>       
+                                </UncontrolledDropdown>       
+                            }                   
+                          
                         </Collapse> 
                     </Navbar>
                 </div>
@@ -85,4 +102,4 @@ class Header extends Component {
     }
 }
 
-export default Header;
+export default withRouter(Header);

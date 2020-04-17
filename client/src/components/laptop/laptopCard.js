@@ -22,7 +22,7 @@ class LaptopCard extends Component {
                          <i className="icons icon-star star5"></i>
                         </CardText>
                         <div style={{ marginTop : "3rem"}}>
-                            <Button color="light"><Link to={"detailLaptop/" + laptop.id}>Chi tiết</Link></Button>{' '}
+                            <Button color="light" style={{border : "solid 1px #DDDDDD"}}><Link to={"detailLaptop/" + laptop.id} style={{ textDecoration : "none", color : "#43A892" }}>Chi tiết</Link></Button>{' '}
                             <Button style={{ backgroundColor : "#43A892"}}>Thêm vào giỏ</Button>
                         </div>
                     </CardBody>

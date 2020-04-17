@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 class Footer extends Component {
     render() {
         return (
-            <div className="container-fluid" style={{backgroundColor : "#E0E0E0"}}>
+            <div className="container-fluid" style={{backgroundColor : "#E0E0E0", paddingBottom : "1rem"}}>
                 <Row style={{paddingTop : "1rem"}}>
                     <Col sm="4">
                         <h5>Truy cập nhanh</h5>
