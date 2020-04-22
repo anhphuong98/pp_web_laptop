@@ -5,7 +5,7 @@ import LaptopList from '../../../components/laptop/laptopList';
 import { getAllLaptop } from '../../../actions/laptopAction';
 import Carousel from '../../../components/carousel/carousel';
 import  { connect } from 'react-redux';
-class HomeContent extends Component {
+class HomePage extends Component {
     componentDidMount() {
         this.props.getAllLaptop();
     }
@@ -54,6 +54,7 @@ class HomeContent extends Component {
                     </Row>
                 </div>
                 <div className="list-laptop">
+                    {console.log(this.props.laptop.laptops)}
                     <LaptopList laptops={this.props.laptop.laptops}/>
                 </div>
                 <div className="home-pagination">
@@ -110,4 +111,4 @@ const mapDispatchToProps = (dispatch) => ({
     getAllLaptop : () => dispatch(getAllLaptop())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeContent);
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
