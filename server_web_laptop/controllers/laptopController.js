@@ -166,13 +166,13 @@ const show = (req, res) => {
         }]
     }).then(function(laptop) {
         if(laptop){
-            res.status(304).json({
-                status : true,
+            res.json({
+                success : true,
                 data : laptop
             });
         }else {
-            res.status(304).json({
-                status : false,
+            res.json({
+                success : false,
                 message : "Invalid laptop"
             });
         }

@@ -328,4 +328,4 @@ const mapDispatchToProps = (dispatch) => ({
     signUp : (data) => dispatch(signUp(data))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SignUpContent));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignUpContent));

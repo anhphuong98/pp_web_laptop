@@ -1,25 +1,18 @@
-import { API_CALLING, GET_LAPTOPS, GET_LAPTOP } from '../actionTypes';
+import { API_CALLING, GET_LAPTOP_TEST } from '../actionTypes';
 
 const initialState = {
-    laptops : [],
     laptop : {},
     apiCallDone : false
 }
 
-const laptopReducer = (state = initialState,  action) => {
+const testLaptopReducer = (state = initialState,  action) => {
     switch(action.type) {
         case API_CALLING:
             return {
                 ...state,
                 apiCallDone : false
             }
-        case GET_LAPTOPS:
-            return {
-                ...state,
-                success : action.payload.success,
-                laptops : action.payload.data.rows
-            }
-        case GET_LAPTOP:
+        case GET_LAPTOP_TEST:
             return {
                 ...state,
                 success : action.payload.success,
@@ -31,4 +24,4 @@ const laptopReducer = (state = initialState,  action) => {
     }
 }
 
-export default laptopReducer;
+export default testLaptopReducer;
