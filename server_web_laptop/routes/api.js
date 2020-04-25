@@ -25,7 +25,7 @@ module.exports = (app) => {
     app.post('/api/laptop/admin/:id', passport.authenticate('jwt-admin', {session : false}), laptopController.addQuantity);
 
     // comment
-    app.get('/api/comment', passport.authenticate('jwt-user', {session : false}), commentController.index);
+    app.get('/api/comment/laptop/:id', commentController.index);
     app.get('/api/comment/:id', passport.authenticate('jwt-user', {session : false}), commentController.show);
     app.post('/api/comment', passport.authenticate('jwt-user', {session : false}), commentController.store);
     app.put('/api/comment/:id', passport.authenticate('jwt-user', {session : false}), commentController.update);

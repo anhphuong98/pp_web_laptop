@@ -54,7 +54,6 @@ class HomePage extends Component {
                     </Row>
                 </div>
                 <div className="list-laptop">
-                    {console.log(this.props.laptop.laptops)}
                     <LaptopList laptops={this.props.laptop.laptops}/>
                 </div>
                 <div className="home-pagination">

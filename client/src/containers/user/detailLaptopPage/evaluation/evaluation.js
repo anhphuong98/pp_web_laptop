@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Evaluation extends Component {
     render() {
         return (
-            <div>This is evaluation</div>
+            <div className="evaluation" style={{backgroundColor : "#FFFFFF"}}>This is evaluation</div>
         );
     }
 }

@@ -1,4 +1,4 @@
-import { API_CALLING, GET_LAPTOPS, GET_LAPTOP } from '../actionTypes'; 
+import { API_CALLING, GET_LAPTOPS, GET_LAPTOP, FILTER_LAPTOP_BY_BRAND } from '../actionTypes'; 
 import axios from 'axios';
 
 export const getAllLaptop = () => dispatch => {
@@ -48,3 +48,21 @@ export const getDetailLaptop = (id) => (
         }
     }
 )
+
+export const filterLaptopByBrand = (brand) => dispatch => {
+    dispatch({
+        type : API_CALLING
+    });
+    axios.get('/api/laptop/brand', {
+        params : {
+            brand : brand
+        }
+    }).then(function(res){
+        dispatch({
+            type : FILTER_LAPTOP_BY_BRAND,
+            payload : res.data
+        })
+    }).catch((error) => {
+        console.log("o goi loi nay");
+    });
+}

@@ -14,3 +14,15 @@ export const API_CALLING = 'API_CALLING';
 export const GET_LAPTOPS = 'GET_LAPTOPS';
 export const GET_LAPTOP = 'GET_LAPTOP';
 export const GET_LAPTOP_TEST = 'GET_LAPTOP_TEST';
+export const FILTER_LAPTOP_BY_BRAND = 'FILTER_LAPTOP_BY_BRAND';
+
+//comment
+
+export const GET_COMMENTS = 'GET_COMMENTS';
+export const ADD_COMMENT = 'ADD_COMMENT';
+export const UPDATE_COMMENT = 'UPDATE_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
+
+//cart
+
+export const ADD_TO_CART = 'ADD_TO_CART';
