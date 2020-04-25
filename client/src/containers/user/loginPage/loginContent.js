@@ -76,9 +76,9 @@ class LoginContent extends Component {
                 console.log(this.props.account.data.role);
                 localStorage.setItem("id", this.props.account.data.id);
                 localStorage.setItem("email", this.props.account.data.email);
-                if(localStorage.getItem("signined") && localStorage.getItem("role") == 0) {
+                if(localStorage.getItem("signined") && Number(localStorage.getItem("role")) === 0) {
                     this.props.history.push("/");
-                }else if(localStorage.getItem("signined") && localStorage.getItem("role") == 1){
+                }else if(localStorage.getItem("signined") && Number(localStorage.getItem("role")) === 1){
                     this.props.history.push("/admin");
                 }
             } else {
@@ -96,7 +96,6 @@ class LoginContent extends Component {
         return (
             <div className="container-fluid">
                 <div className="login-content"  style={{backgroundColor : "#FFFFFF", border : "solid 1px #DDDDDD", padding : "1.5rem 1rem"}}>
-                    {"aaaa"}
                     <Row>
                         <Col sm="6">
                             <Form>

@@ -40,3 +40,5 @@ body {
 .breadcrumb {
   background-color: #FFFFFF;
 }
+
+html { scroll-behavior: smooth; } 

@@ -2,8 +2,8 @@ import React, { Component} from 'react';
 import { Input, NavbarToggler, Navbar, Nav, NavItem, NavLink, NavbarBrand,
     Collapse, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, InputGroup,
     InputGroupAddon, InputGroupText, Breadcrumb, BreadcrumbItem} from 'reactstrap';
-import { withRouter } from 'react-router-dom';
-
+import { withRouter, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 class Header extends Component {
     constructor(props) {
         super(props);
@@ -20,8 +20,8 @@ class Header extends Component {
     }
     handleSignOut() {
         localStorage.clear();
-        window.location.reload();
         this.props.history.push('/');
+        window.location.reload();
     }
     render() {
         return (
@@ -60,8 +60,30 @@ class Header extends Component {
                             </div>
                             <Nav>
                                 <NavItem>
-                                    <i href="#" className="fas fa-shopping-cart" 
-                                        style={{ fontSize : "28px", cursor : "pointer", marginRight : "1rem"}}></i>
+                                    <Link to="/cart" style={{color : "#43A892"}}>
+                                        <i className="fas fa-shopping-cart" 
+                                            style={{ fontSize : "28px", cursor : "pointer", marginRight : "1rem"}}>
+                                        
+                                        </i>
+                                        {
+                                            this.props.cart.quantity === 0
+                                            ?
+                                            ""
+                                            :
+                                            <b style={{
+                                                fontSize: "15px", 
+                                                position : "absolute", 
+                                                color : "#FFFFFF",
+                                                top : "22px",
+                                                right : "132px",
+                                                zIndex : "1"
+                                            }}>
+                                            {
+                                                this.props.cart.quantity
+                                            }
+                                            </b> 
+                                        }
+                                    </Link>
                                 </NavItem>
                             </Nav>       
                             {
@@ -102,4 +124,8 @@ class Header extends Component {
     }
 }
 
-export default withRouter(Header);
+const mapStateToProps = (state) => ({
+    cart : state.cart
+});
+
+export default withRouter(connect(mapStateToProps, null)(Header));

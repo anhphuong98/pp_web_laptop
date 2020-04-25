@@ -9,6 +9,9 @@ const index = (req, res) => {
     db.comment.findAndCountAll({
         limit : limit,
         offset : offset,
+        where : {
+            laptop_id : req.params.id
+        },
         include : [{
             model : db.user
         }]

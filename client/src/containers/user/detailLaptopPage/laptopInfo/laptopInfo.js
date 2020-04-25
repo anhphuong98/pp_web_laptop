@@ -61,7 +61,7 @@ class LaptopInfo extends Component {
                                     <li>- Hệ điều hành: {laptop.os}</li>
                                     <li>- Màu sắc: {laptop.color}</li>
                                     <li>- Chất liệu: {laptop.material}</li>
-                                    <li><a href="/" style={{textDecoration : "none", color : "#43A892", fontSize : "15px"}}>Xem chi tiết</a></li>
+                                    <li><a href="#laptop-detail" style={{textDecoration : "none", color : "#43A892", fontSize : "15px"}}>Xem chi tiết</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -87,8 +87,8 @@ class LaptopInfo extends Component {
                                 <p>Bảo hành: Chính hãng 12 tháng. Đổi mới 30 ngày</p>
                             </div>
                             <div className="cart-button">
-                                <Button color="primary">Mua ngay</Button>
-                                <Button color="success">Thêm vào giỏ</Button>
+                                <Button color="danger">Mua ngay</Button>{' '}
+                                <Button style={{backgroundColor : "#43A892"}}>Thêm vào giỏ</Button>
                             </div>
                             <div className="advertisement" style={{paddingTop : "6rem"}}>
                                 <div className="line" style={{borderTop : "solid 1px #ddd", paddingTop : "1rem"}}></div>
