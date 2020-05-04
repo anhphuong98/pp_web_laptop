@@ -26,3 +26,8 @@ export const DELETE_COMMENT = 'DELETE_COMMENT';
 //cart
 
 export const ADD_TO_CART = 'ADD_TO_CART';
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+
+//order
+
+export const ADD_ORDER = 'ADD_ORDER';

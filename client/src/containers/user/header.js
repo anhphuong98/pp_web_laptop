@@ -8,7 +8,8 @@ class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isOpen : false
+            isOpen : false,
+            quantityLaptop : localStorage.getItem("order") ? JSON.parse(localStorage.getItem("order")).length : 0
         };
         this.toggle = this.toggle.bind(this);
         this.handleSignOut = this.handleSignOut.bind(this);
@@ -23,7 +24,15 @@ class Header extends Component {
         this.props.history.push('/');
         window.location.reload();
     }
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.cart !== this.props.cart){
+            this.setState({
+                quantityLaptop : localStorage.getItem("order") ? JSON.parse(localStorage.getItem("order")).length : 0
+            })
+        }
+    }
     render() {
+        console.log(this.props.cart)
         return (
             <div className="header" id="header">
                 <div className="container-fluid" style={{backgroundColor : "#FFFFFF"}}>  
@@ -63,26 +72,26 @@ class Header extends Component {
                                     <Link to="/cart" style={{color : "#43A892"}}>
                                         <i className="fas fa-shopping-cart" 
                                             style={{ fontSize : "28px", cursor : "pointer", marginRight : "1rem"}}>
-                                        
-                                        </i>
-                                        {
-                                            this.props.cart.quantity === 0
-                                            ?
-                                            ""
-                                            :
-                                            <b style={{
-                                                fontSize: "15px", 
-                                                position : "absolute", 
-                                                color : "#FFFFFF",
-                                                top : "22px",
-                                                right : "132px",
-                                                zIndex : "1"
-                                            }}>
-                                            {
-                                                this.props.cart.quantity
+                                             {
+                                                this.state.quantityLaptop === 0
+                                                ?
+                                                ""
+                                                :
+                                                <b style={{
+                                                    fontSize: "15px", 
+                                                    position : "relative", 
+                                                    color : "#FFFFFF",
+                                                    top : "-9px",
+                                                    right : "16px",
+                                                    zIndex : "1"
+                                                }}>
+                                                {
+                                                    this.state.quantityLaptop
+                                                }
+                                                </b> 
                                             }
-                                            </b> 
-                                        }
+                                        </i>
+                                       
                                     </Link>
                                 </NavItem>
                             </Nav>       
