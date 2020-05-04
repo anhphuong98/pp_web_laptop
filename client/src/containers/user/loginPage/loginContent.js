@@ -73,6 +73,8 @@ class LoginContent extends Component {
                 localStorage.setItem("token", this.props.account.token);
                 localStorage.setItem("name", this.props.account.data.name);
                 localStorage.setItem("role", this.props.account.data.role);
+                localStorage.setItem("phone", this.props.account.data.phone);
+                localStorage.setItem("address", this.props.account.data.address);
                 console.log(this.props.account.data.role);
                 localStorage.setItem("id", this.props.account.data.id);
                 localStorage.setItem("email", this.props.account.data.email);

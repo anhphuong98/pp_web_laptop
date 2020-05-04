@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Col, Card, CardBody, CardTitle, CardImg, CardSubtitle, Button, CardText, Modal, ModalBody, ModalFooter } from 'reactstrap';
 import { Link, withRouter } from 'react-router-dom';
-import { addToCard } from '../../actions/cartAction';
+import { addToCart } from '../../actions/cartAction';
 import { connect } from 'react-redux';
 
 class LaptopCard extends Component {
@@ -12,8 +12,9 @@ class LaptopCard extends Component {
             openModalLoginSuggestion : false,
             openModalAddToCart : false
         }
-        this.closeModal = this.closeModal.bind(this);
         this.handleAddToCart = this.handleAddToCart.bind(this);
+        this.closeModalAddToCart = this.closeModalAddToCart.bind(this);
+        this.closeModalLoginSuggnestion = this.closeModalLoginSuggnestion.bind(this)
     }
     setBrand() {
         localStorage.setItem("brand", this.props.laptop.brand);
@@ -23,10 +24,10 @@ class LaptopCard extends Component {
         window.location.reload();
     }
     // kiem tra xem laptop da co trong cart hay chua
-    checkCart(laptops, laptop) {
+    checkCart(order, orderDetail) {
         let result = false;
-        laptops.forEach(element => {
-            if(element.id == laptop.id){
+        order.forEach(element => {
+            if(element.laptop.id === orderDetail.laptop.id){
                 result =  true
             }
         });
@@ -42,26 +43,32 @@ class LaptopCard extends Component {
             this.setState({
                 openModalAddToCart : true
             });
-            let oldLaptops = JSON.parse(localStorage.getItem('laptops')) || [];
-            console.log(oldLaptops);
+            let oldOrder = JSON.parse(localStorage.getItem('order')) || [];
             const laptop = this.props.laptop;
-            if(this.checkCart(oldLaptops, laptop) === false){
-                oldLaptops.push(laptop);
-                console.log(oldLaptops.indexOf(laptop))
+            const orderDetail = {
+                laptop : laptop,
+                quantity : 1
+            }
+            if(this.checkCart(oldOrder, orderDetail) === false){
+                oldOrder.push(orderDetail);
                 //stringiy de chuyen tu object sang Json... localstorage chi luu json 
                 // => mang object => mangjson duoc luu lai
-                localStorage.setItem('laptops', JSON.stringify(oldLaptops));
+                localStorage.setItem('order', JSON.stringify(oldOrder));
+                this.props.addToCart(oldOrder.length + 1);
             }  else {
                 console.log("trong local co roi")
             }
         }
     }
-    closeModal() {
+    closeModalAddToCart() {
         this.setState({
             openModalAddToCart : false,
+        });
+    }
+    closeModalLoginSuggnestion() {
+        this.setState({
             openModalLoginSuggestion : false
-        })
-        this.props.addToCard(JSON.parse(localStorage.getItem('laptops')).length)
+        });
     }
     render() {
         const laptop = this.props.laptop;
@@ -93,17 +100,18 @@ class LaptopCard extends Component {
                         </div>
                     </CardBody>
                 </Card>
-                <Modal isOpen={this.state.openModalAddToCart} toggle={this.closeModal}>
+                <Modal isOpen={this.state.openModalAddToCart} toggle={this.closeModalAddToCart}>
                     <ModalBody>Đã thêm vào giỏ hàng</ModalBody>
                     <ModalFooter>
-                        <Button style={{backgroundColor : "#43A892"}} onClick={this.closeModal}>OK</Button>
+                        <Button style={{backgroundColor : "#43A892"}}><Link to="/cart" style={{color : "#FFFFFF", textDecoration : "none"}}>Giỏ hàng</Link></Button>
+                        <Button style={{backgroundColor : "#43A892"}} onClick={this.closeModalAddToCart}>OK</Button>
                     </ModalFooter>
                 </Modal>
-                <Modal isOpen={this.state.openModalLoginSuggestion} toggle={this.closeModal}>
+                <Modal isOpen={this.state.openModalLoginSuggestion} toggle={this.closeModalLoginSuggnestion}>
                     <ModalBody>Bạn cần đăng nhập để  mua hàng!!!</ModalBody>
                     <ModalFooter>
                         <Button style={{backgroundColor : "#43A892"}}><Link to="/login" style={{color : "#FFFFFF", textDecoration : "none"}}>Đăng nhập</Link></Button>
-                        <Button onClick={this.closeModal}>Hủy</Button>
+                        <Button onClick={this.closeModalLoginSuggnestion}>Hủy</Button>
                     </ModalFooter>
                 </Modal>
             </Col>
@@ -112,7 +120,7 @@ class LaptopCard extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    addToCard : (quantity) => dispatch(addToCard(quantity))
+    addToCart : (quantity) => dispatch(addToCart(quantity))
 });
 
 export default  withRouter(connect(null, mapDispatchToProps)(LaptopCard));
