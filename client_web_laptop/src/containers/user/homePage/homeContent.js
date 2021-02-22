@@ -6,11 +6,10 @@ import { getAllLaptop } from '../../../actions/laptopAction';
 import Carousel from '../../../components/carousel/carousel';
 import  { connect } from 'react-redux';
 class HomePage extends Component {
-    componentDidMount() {
+    componentWillMount() {
         this.props.getAllLaptop();
     }
     render() {
-       
         return (
             <div className="container-fluid">
                 <Row>

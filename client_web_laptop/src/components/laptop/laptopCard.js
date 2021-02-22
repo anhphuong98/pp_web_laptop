@@ -14,13 +14,21 @@ class LaptopCard extends Component {
         }
         this.handleAddToCart = this.handleAddToCart.bind(this);
         this.closeModalAddToCart = this.closeModalAddToCart.bind(this);
-        this.closeModalLoginSuggnestion = this.closeModalLoginSuggnestion.bind(this)
+        this.closeModalLoginSuggestion = this.closeModalLoginSuggestion.bind(this)
+    }
+    convertToSlug(Text) {
+        return Text
+            .toLowerCase()
+            .replace(/ /g,'-')
+            .replace(/[^\w-]+/g,'')
+            ;
     }
     setBrand() {
         localStorage.setItem("brand", this.props.laptop.brand);
         // Khi click vao phai truyen brand qua trang tiep de render theo brand
         // nen truyen bang localStorage
-        this.props.history.push("/detailLaptop/" + this.props.laptop.id);
+        var nameLaptop = this.convertToSlug(this.props.laptop.name);
+        this.props.history.push("/" + this.props.laptop.id + "/" + nameLaptop);
         window.location.reload();
     }
     // kiem tra xem laptop da co trong cart hay chua
@@ -65,7 +73,7 @@ class LaptopCard extends Component {
             openModalAddToCart : false,
         });
     }
-    closeModalLoginSuggnestion() {
+    closeModalLoginSuggestion() {
         this.setState({
             openModalLoginSuggestion : false
         });
@@ -107,11 +115,11 @@ class LaptopCard extends Component {
                         <Button style={{backgroundColor : "#43A892"}} onClick={this.closeModalAddToCart}>OK</Button>
                     </ModalFooter>
                 </Modal>
-                <Modal isOpen={this.state.openModalLoginSuggestion} toggle={this.closeModalLoginSuggnestion}>
+                <Modal isOpen={this.state.openModalLoginSuggestion} toggle={this.closeModalLoginSuggestion}>
                     <ModalBody>Bạn cần đăng nhập để  mua hàng!!!</ModalBody>
                     <ModalFooter>
                         <Button style={{backgroundColor : "#43A892"}}><Link to="/login" style={{color : "#FFFFFF", textDecoration : "none"}}>Đăng nhập</Link></Button>
-                        <Button onClick={this.closeModalLoginSuggnestion}>Hủy</Button>
+                        <Button onClick={this.closeModalLoginSuggestion}>Hủy</Button>
                     </ModalFooter>
                 </Modal>
             </Col>

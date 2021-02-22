@@ -3,6 +3,7 @@ var laptopController = require('../controllers/laptopController');
 var commentController = require('../controllers/commentController');
 var evaluationController = require('../controllers/evaluationController');
 var orderController = require('../controllers/orderController');
+var productController = require('../controllers/productController');
 var passport = require('passport');
 
 module.exports = (app) => {
@@ -56,5 +57,11 @@ module.exports = (app) => {
 
     // image
     //user
+
+
+    app.get('/api/product', productController.index);
+    app.post('/api/product', productController.store);
+    app.put('/api/product/:id', productController.update);
+    app.delete('/api/product/:id', productController.destroy);
 
 }
