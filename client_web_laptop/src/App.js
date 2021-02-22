@@ -28,7 +28,7 @@ class App extends Component {
                     <div>
                         <Switch>
                             <Route exact path="/" component={() => <HomePage />} />
-                            <Route exact path="/detailLaptop/:id" component={() => <DetailLaptopPage />} />
+                            <Route exact path="/:id/:name" component={() => <DetailLaptopPage />} />
                             <Route exact path="/login" component={() => <LoginPage />} />
                             <Route exact path="/signUp" component={() => <SignUpPage />} />
                             <Route exact path="/cart" component={() => <DetailCartPage />} />

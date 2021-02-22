@@ -124,8 +124,7 @@ class Header extends Component {
                 </div>
                 <div style={{marginTop : "1rem"}} className="container-fluid">
                     <Breadcrumb style={{ backgroundColor : "white"}}>
-                        <BreadcrumbItem><a href="/">Trang chủ</a></BreadcrumbItem>
-                        <BreadcrumbItem active>Liên hệ</BreadcrumbItem>
+                        <BreadcrumbItem><Link to="/">Trang chủ</Link></BreadcrumbItem>
                     </Breadcrumb>
                 </div>
             </div>

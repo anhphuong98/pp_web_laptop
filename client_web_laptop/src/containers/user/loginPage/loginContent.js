@@ -67,8 +67,10 @@ class LoginContent extends Component {
         });
     }
     componentDidUpdate() {
+        console.log("Vao vao vao")
+        console.log(this.props.account);
         if(this.props.account.apiCallDone) {
-            if(this.props.account.success) {
+            if(this.props.account.success) {  
                 localStorage.setItem("signined", this.props.account.success);
                 localStorage.setItem("token", this.props.account.token);
                 localStorage.setItem("name", this.props.account.data.name);
